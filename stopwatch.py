@@ -1,16 +1,25 @@
-# Import Library
-import datetime
+import time
 
-# Get time for start
-input("Press Enter to start.")
-start_time = str(datetime.datetime.now().time()).split(":")
-start_hour = start_time[0]
-start_minute = start_time[1]
-start_second = start_time[2]
+def format_time(seconds):
+    """Format time in hours:minutes:seconds.hundredths."""
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    seconds = seconds % 60
+    hundredths = int((seconds - int(seconds)) * 100)
+    
+    return f"{hours:02}:{minutes:02}:{int(seconds):02}.{hundredths:02}"
 
-# Get time for stop
-input("Press Enter again to stop.")
-stop_time = str(datetime.datetime.now().time()).split(":")
-stop_hour = stop_time[0]
-stop_minute = stop_time[1]
-stop_second = stop_time[2]
+def stopwatch():
+    input("Press Enter to start the stopwatch...")
+    start_time = time.time()
+    
+    input("Press Enter to stop the stopwatch...")
+    end_time = time.time()
+    
+    elapsed_time = end_time - start_time
+    formatted_time = format_time(elapsed_time)
+    
+    print(f"Elapsed time: {formatted_time}")
+
+if __name__ == "__main__":
+    stopwatch()
